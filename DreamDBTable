@@ -1,0 +1,12 @@
+DreamDBTable
+UserTable:
+MacID   UserID  LastTime
+
+Dream:
+DreamID DreamTime   UserID  DreamInfo
+
+Comment:
+DreamID CommentID   UserID  CommentInfo CommentTime
+
+ChatInfo:
+UserIDS  UserT  ChatTime    ChatInfo
