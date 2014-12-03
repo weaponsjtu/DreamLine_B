@@ -1,83 +1,92 @@
 Dream About
 All data transmission use JSON format.
 Register: 
-POST http://dream.com/register  {MacID:"d432323"}
+POST http://dream.com/register
 1.  Client send MacID to Server.
+{MacID:"d432323"}
 2.  Server return the corresponding UserID.
 {UserID:"d432323"}
 
 LOGIN:
 GET http://dream.com/login/UserID 
 1.  Client login with UserID
-2.  Server return others comments of the dream and early chat info.
- Client generate dreamID.
-{
-SharedDream:
-    [
-        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"},
-        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"}
-    ]
-DreamComments:
-    [
-        {
-            DreamID: "23242423", Comments:
-                [
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
-                ]
-        },
-        {
-            DreamID: "23242423", Comments:
-                [
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
-                ]
-        }
-    ]
- ChatInfo:
-    [
-        {UserID:"d432323", Time:"234244123131"},
-        {UserID:"d432323", Time:"234244123131"}
-    ]
-}
-We only allow chat between any 2 users.
+2.  Server return login status.
 
-UPDATE:
-GET http://dream.com/update/UserID 
-1.  Client periodly send update request to Sever.
-2.  Server return others comments of some dream and chat info.
-Q: Client with timeInfo or server cal time x
+Get comment to self-shared dreams.
+GET http://dream.com/commnet/DreamID
+1.  Client sent this to Server.
+2.  Server return all the latest comment.
+    DB for each dream has a latest update request time.
 {
-SharedDream:
-    [
-        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"},
-        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"}
-    ]
-DreamComments:
+    AllComents:
     [
         {
-            DreamID: "23242423", Comments:
-                [
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
-                ]
+            DreamID: "d4323232", Comments:
+            [
+                {UserID:"234424243", Time: "23324223", Comment:"2343234223"},
+                {UserID:"234424243", Time: "23324223", Comment:"2343234223"}
+            ]
         },
         {
-            DreamID: "23242423", Comments:
-                [
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
-                ]
+            DreamID: "d4323232", Comments:
+            [
+                {UserID:"234424243", Time: "23324223", Comment:"2343234223"},
+                {UserID:"234424243", Time: "23324223", Comment:"2343234223"}
+            ]
         }
-    ]
- ChatInfo:
-    [
-        {UserID:"d432323", UserID:"324223423", Time:"234244123131"},
-        {UserID:"d432323", UserID:"324223423", Time:"234244123131"}
     ]
 }
 
-Share Dream:
+Get latest shared dreams.
+GET http://dream.com/latestDreams/time
+1.  Client sent this to server.
+2.  Server return all the latest other user shared dreams at most 10.
+{
+    AllDreams:
+    [
+        {DreamID: "d3242342", UserID:"2323324342", Time:"2324324", DreamInfo:""},
+        {DreamID: "d3242342", UserID:"2323324342", Time:"2324324", DreamInfo:""}
+    ]
+}
+
+Get earlier shared dreams.
+GET http://dream.com/earlyDreams/time
+1. Client sent this request to server.
+2. Server return all shared dreams early than $time$ at most 10.
+{
+    AllDreams:
+    [
+        {DreamID: "d3242342", UserID:"2323324342", Time:"2324324", DreamInfo:""},
+        {DreamID: "d3242342", UserID:"2323324342", Time:"2324324", DreamInfo:""}
+    ]
+}
+
+Get latest comments.
+GET http://dream.com/latestComments/dreamID/time
+1. Client sent this request to server.
+2. Server return all comments with $time$ > time at most 10.
+{
+    AllDreams:
+    [
+        {CommentID:"", UserID: "", Time:"", CommentInfo:""},
+        {CommentID:"", UserID: "", Time:"", CommentInfo:""}
+    ]
+}
+
+Get earlier comments.
+GET http://dream.com/earlyComments/dreamID/time
+1.  Client sent this request to server.
+2.  Server return all comment with $time$ < time at most 10.
+{
+    AllComments:
+    [
+        {CommentID:"", UserID: "", Time:"", CommentInfo:""},
+        {CommentID:"", UserID: "", Time:"", CommentInfo:""}
+    ]
+}
+
+
+Share dream:
 POST http://dream.com/share/UserID
 1.  Client send the share request.
 {
@@ -85,44 +94,16 @@ POST http://dream.com/share/UserID
     DreamInfo: "dsfasdfasfasfsafa",
     DreamTime: "sdfafdasfafdasfdafsaf"
 }
-2.  Server send the share info to other user with other updateinfo.
-{
-SharedDream:
-    [
-        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"},
-        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"}
-    ]
-DreamComments:
-    [
-        {
-            DreamID: "23242423", Comments:
-                [
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
-                ]
-        },
-        {
-            DreamID: "23242423", Comments:
-                [
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
-                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
-                ]
-        }
-    ]
- ChatInfo:
-    [
-        {UserID:"d432323", UserID:"324223423", Time:"234244123131"},
-        {UserID:"d432323", UserID:"324223423", Time:"234244123131"}
-    ]
-}
+2.  Server send feedback of this request status.
+
 
 Comment to Dream:
-POST http://dream.com/comment/UserID
+POST http://dream.com/comment/DreamID
 1.  Client send comment to server.
 {
-    DreamID: "23234234",
+    UserID: "23234234",
     CommentID:  "2d3f3e",
     CommentContent: "",
     Time:"234234233423"
 }
-2. Server send the other share info to the user with other updateinfo.
+2. Server send status to client.
