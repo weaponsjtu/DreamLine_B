@@ -3,7 +3,7 @@ UserTable:
 MacID   UserID  LastTime
 
 Dream:
-DreamID DreamTime   UserID  DreamInfo
+DreamID DreamTime   UserID  DreamInfo LastestRequestTime
 
 Comment:
 DreamID CommentID   UserID  CommentInfo CommentTime
