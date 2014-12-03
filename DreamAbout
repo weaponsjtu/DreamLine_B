@@ -8,7 +8,7 @@ POST http://dream.com/register
 {UserID:"d432323"}
 
 LOGIN:
-GET http://dream.com/login/UserID 
+POST http://dream.com/login/UserID 
 1.  Client login with UserID
 2.  Server return login status.
 
