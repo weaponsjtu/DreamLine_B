@@ -1,7 +1,7 @@
 Dream About
 All data transmission use JSON format.
 Register: 
-POST http://dream.com/register	{MacID:"d432323"}
+POST http://dream.com/register  {MacID:"d432323"}
 1.  Client send MacID to Server.
 2.  Server return the corresponding UserID.
 {UserID:"d432323"}
@@ -10,7 +10,7 @@ LOGIN:
 GET http://dream.com/login/UserID 
 1.  Client login with UserID
 2.  Server return others comments of the dream and early chat info.
-Q: Who generate commentID? Client or Server?
+ Client generate dreamID.
 {
 SharedDream:
     [
@@ -36,8 +36,8 @@ DreamComments:
     ]
  ChatInfo:
     [
-        {UserID:"d432323", UserID:"324223423", Time:"234244123131"},
-        {UserID:"d432323", UserID:"324223423", Time:"234244123131"}
+        {UserID:"d432323", Time:"234244123131"},
+        {UserID:"d432323", Time:"234244123131"}
     ]
 }
 We only allow chat between any 2 users.
@@ -115,3 +115,13 @@ DreamComments:
         {UserID:"d432323", UserID:"324223423", Time:"234244123131"}
     ]
 }
+
+Comment to Dream:
+POST http://dream.com/comment/UserID
+1.  Client send comment to server.
+{
+    CommentID:  "2d3f3e",
+    CommentContent: "",
+    Time:"234234233423"
+}
+2. Server send the other share info to the user with other updateinfo.
