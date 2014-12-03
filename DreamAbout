@@ -11,13 +11,33 @@ GET http://dream.com/login/UserID
 1.  Client login with UserID
 2.  Server return others comments of the dream and early chat info.
 Q: Who generate commentID? Client or Server?
-{DreamID: "2b3f3ee", Comments:
-    [CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"
-     CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"
+{
+SharedDream:
+    [
+        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"},
+        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"}
+    ]
+DreamComments:
+    [
+        {
+            DreamID: "23242423", Comments:
+                [
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
+                ]
+        },
+        {
+            DreamID: "23242423", Comments:
+                [
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
+                ]
+        }
     ]
  ChatInfo:
-    [UserID:"d432323", UserID:"324223423", Time:"234244123131",
-     UserID:"d432323", UserID:"324223423", Time:"234244123131"
+    [
+        {UserID:"d432323", UserID:"324223423", Time:"234244123131"},
+        {UserID:"d432323", UserID:"324223423", Time:"234244123131"}
     ]
 }
 We only allow chat between any 2 users.
@@ -28,17 +48,32 @@ GET http://dream.com/update/UserID
 2.  Server return others comments of some dream and chat info.
 Q: Client with timeInfo or server cal time ?
 {
-ShareDream:
-    [{UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"},
-     {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"}
+SharedDream:
+    [
+        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"},
+        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"}
     ]
-DreamID: "2b3f3ee", Comments:
-    [{CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
-     {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
+DreamComments:
+    [
+        {
+            DreamID: "23242423", Comments:
+                [
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
+                ]
+        },
+        {
+            DreamID: "23242423", Comments:
+                [
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
+                ]
+        }
     ]
  ChatInfo:
-    [{UserID:"d432323", UserID:"324223423", Time:"234244123131"},
-     {UserID:"d432323", UserID:"324223423", Time:"234244123131"}
+    [
+        {UserID:"d432323", UserID:"324223423", Time:"234244123131"},
+        {UserID:"d432323", UserID:"324223423", Time:"234244123131"}
     ]
 }
 
@@ -51,3 +86,32 @@ POST http://dream.com/share/UserID
     DreamTime: "sdfafdasfafdasfdafsaf"
 }
 2.  Server send the share info to other user with other updateinfo.
+{
+SharedDream:
+    [
+        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"},
+        {UserID:"2342334", DreamID: "24234324", DreamInfo:"3241242142141241431412", DreamTime:"23412432"}
+    ]
+DreamComments:
+    [
+        {
+            DreamID: "23242423", Comments:
+                [
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
+                ]
+        },
+        {
+            DreamID: "23242423", Comments:
+                [
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"324223423", Time:"23422342323"},
+                    {CommentID: "3d5f2ed", CommentContent: "", UserID:"234324232", Time:"23432412342"}
+                ]
+        }
+    ]
+ ChatInfo:
+    [
+        {UserID:"d432323", UserID:"324223423", Time:"234244123131"},
+        {UserID:"d432323", UserID:"324223423", Time:"234244123131"}
+    ]
+}
