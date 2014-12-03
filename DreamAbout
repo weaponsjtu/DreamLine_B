@@ -46,7 +46,7 @@ UPDATE:
 GET http://dream.com/update/UserID 
 1.  Client periodly send update request to Sever.
 2.  Server return others comments of some dream and chat info.
-Q: Client with timeInfo or server cal time ?
+Q: Client with timeInfo or server cal time x
 {
 SharedDream:
     [
@@ -120,6 +120,7 @@ Comment to Dream:
 POST http://dream.com/comment/UserID
 1.  Client send comment to server.
 {
+    DreamID: "23234234",
     CommentID:  "2d3f3e",
     CommentContent: "",
     Time:"234234233423"
